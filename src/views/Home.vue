@@ -1,18 +1,69 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Productos</h1>
+    <div class="products">
+      <Card v-for="{name, sell_price, id} in products" :key="id" :price="sell_price" :product_name="name"></Card>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
+import axios from "axios";
+import Card from "../components/Card";
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
+  components: {Card},
+  data: function () {
+    return {
+      products: []
+    }
+  },
+  methods: {
+    getData: async function () {
+      if (localStorage.getItem("token_access") === null || localStorage.getItem("token_refresh") === null) {
+        this.$emit('logOut');
+      }
+
+      await this.verifyToken();
+
+      const token = localStorage.getItem("token_access")
+      axios.get("https://ecommerce-aacjp-missiontic.herokuapp.com/api/products/", {headers: {"Authorization": `Bearer ${token}`}}).then((result) => {
+        const products = result.data
+        for (let i = 0; i < products.length ; i++) {
+          this.products.push(products[i])
+        }
+        console.log(this.products)
+      })
+    },
+    verifyToken: function () {
+      return axios.post("https://ecommerce-aacjp-missiontic.herokuapp.com/refresh",
+          {refresh: localStorage.getItem("token_refresh")}, {headers: {}}).then((result) => {
+        localStorage.setItem("token_access", result.data.access);
+      }).catch((error) => {
+        this.$emit('logOut')
+      })
+    }
+  },
+  created: async function () {
+    await this.getData()
   }
 }
 </script>
+<style scoped>
+h1 {
+  text-align: center;
+}
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-shadow: 1px 1px 5px;
+  -moz-box-shadow: 1px 1px 5px;
+  box-shadow: 1px 1px 5px;
+  padding: 5% 5%  5% 5%;
+  margin: 0 10% 0 10%;
+}
+</style>
