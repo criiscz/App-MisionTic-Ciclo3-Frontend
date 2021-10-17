@@ -34,7 +34,6 @@ export default {
         for (let i = 0; i < products.length ; i++) {
           this.products.push(products[i])
         }
-        console.log(this.products)
       })
     },
     verifyToken: function () {
@@ -63,7 +62,7 @@ h1 {
   -webkit-box-shadow: 1px 1px 5px;
   -moz-box-shadow: 1px 1px 5px;
   box-shadow: 1px 1px 5px;
-  padding: 5% 5%  5% 5%;
+  padding: 5% 5% 5% 5%;
   margin: 0 10% 0 10%;
 }
 </style>

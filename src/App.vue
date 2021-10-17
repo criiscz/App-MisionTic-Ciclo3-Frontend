@@ -44,7 +44,6 @@ export default {
     Footer,
     Button_Nav
   },
-
   methods: {
     verifyAuth: function () {
       this.is_auth = localStorage.getItem('is_auth') || false
@@ -52,6 +51,7 @@ export default {
         this.$router.push({name: "login"})
       else this.$router.push({name: "home"})
     },
+
     loadLogin: function () {
       this.$router.push({name: "login"})
     },
@@ -59,7 +59,6 @@ export default {
       this.$router.push({name: "signup"})
     },
     completedLogin: function (data) {
-      console.log("completedLogin")
       localStorage.setItem("is_auth", true);
       localStorage.setItem("username", data.username)
       localStorage.setItem("token_access", data.token_access)
@@ -79,9 +78,7 @@ export default {
     }
   },
   created: function () {
-    console.log("Creado")
     this.verifyAuth()
-    console.log(this.is_auth)
   }
 }
 </script>
@@ -148,7 +145,5 @@ img {
 .body {
   display: flex;
   flex-direction: column;
-  position: relative;
-  height: 100vh;
 }
 </style>

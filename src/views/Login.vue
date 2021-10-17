@@ -34,14 +34,13 @@ export default {
           "https://ecommerce-aacjp-missiontic.herokuapp.com/login",
           this.user,
           {headers: {}}
+
       ).then((result) => {
-        let dataLogIn = {
+        const dataLogIn = {
           username: this.user.username,
           token_access: result.data.access,
           token_refresh: result.data.refresh,
         }
-        console.log("Then data")
-        console.log(dataLogIn)
         this.$emit('completedLogin', dataLogIn)
       }).catch((error) => {
         if (error.response.status == "401")
