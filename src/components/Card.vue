@@ -71,7 +71,6 @@ export default {
 }
 
 .add-car:hover {
-  text-decoration: underline;
   background-color: #5c9dcd;
   -webkit-transform: scale(1.1);
   -moz-transform: scale(1.1);

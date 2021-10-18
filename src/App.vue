@@ -8,7 +8,7 @@
 
         <div class="buttons">
           <Button_Nav v-if="is_auth" v-on:click="loadHome" msg="Tienda"/>
-          <Button_Nav v-if="is_auth" v-on:click="loadOrder" msg="MiPedido"/>
+          <Button_Nav v-if="is_auth" v-on:click="loadOrder" msg="Consultar Pedido"/>
           <Button_Nav v-if="is_auth" v-on:click="showCart" msg="MiCarrito"/>
           <Button_Nav v-if="is_auth" v-on:click="loadProfile" msg="MiCuenta"/>
           <Button_Nav v-if="is_auth" v-on:click="logOut" msg="Cerrar Sesion"></Button_Nav>
@@ -138,7 +138,7 @@ img {
   top: 50px;
   margin-bottom: 150px;
   margin-top: 2rem;
-  height: 100%;
+  min-height: 65vh;
 }
 
 .foot {

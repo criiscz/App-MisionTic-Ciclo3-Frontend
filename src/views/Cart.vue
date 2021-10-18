@@ -71,7 +71,6 @@ export default {
       let order = {}
       order.sells = []
       const products = JSON.parse(JSON.stringify(this.products))
-      console.log(products)
       for (const product in products) {
         const sell = {
           product: products[product].id,
@@ -95,12 +94,11 @@ export default {
         localStorage.setItem("products", null)
         this.products = []
       }).catch((error) => {
-        console.log(error)
+        console.error(error)
       })
 
     },
     fillProducts: function () {
-      console.log(localStorage.getItem("products"));
       const products = JSON.parse(localStorage.getItem("products"))
       if (products != null) {
         for (const product of products) {
