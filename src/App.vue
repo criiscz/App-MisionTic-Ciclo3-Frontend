@@ -9,7 +9,7 @@
         <div class="buttons">
           <Button_Nav v-if="is_auth" v-on:click="loadHome" msg="Tienda"/>
           <Button_Nav v-if="is_auth" v-on:click="loadOrder" msg="MiPedido"/>
-          <Button_Nav v-if="is_auth" v-on:click="loadCar" msg="MiCarrito"/>
+          <Button_Nav v-if="is_auth" v-on:click="showCart" msg="MiCarrito"/>
           <Button_Nav v-if="is_auth" v-on:click="loadProfile" msg="MiCuenta"/>
           <Button_Nav v-if="is_auth" v-on:click="logOut" msg="Cerrar Sesion"></Button_Nav>
           <Button_Nav v-if="!is_auth" v-on:click="loadLogin" msg="Iniciar Sesión"/>
@@ -75,6 +75,9 @@ export default {
     logOut: function () {
       localStorage.clear()
       this.verifyAuth()
+    },
+    showCart : function () {
+      this.$router.push({name: "cart"})
     }
   },
   created: function () {
