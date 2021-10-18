@@ -65,8 +65,8 @@ export default {
 .container_login_user {
   border: 3px solid #0AF;
   border-radius: 10px;
-  height: 40%;
-  width: 50%;
+  height: 20em;
+  width: 15em;
   display: flex;
   flex-direction: column;
   justify-content: center;
