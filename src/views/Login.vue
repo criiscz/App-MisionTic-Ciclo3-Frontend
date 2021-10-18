@@ -34,14 +34,13 @@ export default {
           "https://ecommerce-aacjp-missiontic.herokuapp.com/login",
           this.user,
           {headers: {}}
+
       ).then((result) => {
-        let dataLogIn = {
+        const dataLogIn = {
           username: this.user.username,
           token_access: result.data.access,
           token_refresh: result.data.refresh,
         }
-        console.log("Then data")
-        console.log(dataLogIn)
         this.$emit('completedLogin', dataLogIn)
       }).catch((error) => {
         if (error.response.status == "401")
@@ -66,8 +65,8 @@ export default {
 .container_login_user {
   border: 3px solid #0AF;
   border-radius: 10px;
-  height: 40%;
-  width: 50%;
+  height: 20em;
+  width: 15em;
   display: flex;
   flex-direction: column;
   justify-content: center;
