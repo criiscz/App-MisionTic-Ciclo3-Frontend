@@ -2,7 +2,7 @@
   <div class="card">
     <p>Producto: {{ product_name }}<br>
       <span>Precio: {{ price }}</span></p>
-    <div class="add-car noselect" v-on:click="addToCar">Agregar a carrito</div>
+    <div class="add-car no-select" v-on:click="addToCar">Agregar a carrito</div>
   </div>
 </template>
 
@@ -66,25 +66,29 @@ export default {
   background-color: #5c8dcd;
   border-radius: 5px;
   padding: 5px;
+  transition: all 0.2s;
   cursor: pointer;
 }
 
 .add-car:hover {
   text-decoration: underline;
-  background-color: #5c9dcd
+  background-color: #5c9dcd;
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .add-car:active {
   background-color: #5c7dcd;
 }
 
-.noselect {
+.no-select {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none;
-  /* Non-prefixed version, currently
-                                   supported by Chrome, Edge, Opera and Firefox */
 }
 </style>
