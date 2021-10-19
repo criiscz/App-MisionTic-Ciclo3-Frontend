@@ -10,6 +10,7 @@
           <Button_Nav v-if="is_auth" v-on:click="loadHome" msg="Tienda"/>
           <Button_Nav v-if="is_auth" v-on:click="loadOrder" msg="Consultar Pedido"/>
           <Button_Nav v-if="is_auth" v-on:click="showCart" msg="MiCarrito"/>
+          <Button_Nav v-if="is_auth" v-on:click="loadMyOrders()" msg="MisPedidos"/>
           <Button_Nav v-if="is_auth" v-on:click="loadProfile" msg="MiCuenta"/>
           <Button_Nav v-if="is_auth" v-on:click="logOut" msg="Cerrar Sesion"></Button_Nav>
           <Button_Nav v-if="!is_auth" v-on:click="loadLogin" msg="Iniciar Sesión"/>
@@ -78,6 +79,15 @@ export default {
     },
     showCart : function () {
       this.$router.push({name: "cart"})
+    },
+    loadOrder: function (){
+
+    },
+    loadProfile: function () {
+
+    },
+    loadMyOrders: function (){
+
     }
   },
   created: function () {

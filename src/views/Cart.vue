@@ -52,7 +52,6 @@ export default {
         let productE = products[product]
         total += productE.sell_price * productE.quantity
       }
-      console.log(total)
       return total;
     },
     calculateIva: function () {

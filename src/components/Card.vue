@@ -38,7 +38,6 @@ export default {
           {headers: {'Authorization': `Bearer ${token}`}}
       ).then((result) => {
         this.product = result.data[0];
-        console.log(this.product)
       }).catch((error) => {
         alert(error)
       })
@@ -50,7 +49,7 @@ export default {
 <style scoped>
 .card {
   border-radius: 5px;
-  margin: 5px;
+  margin: 1em;
   width: 15em;
   height: 10em;
   display: flex;
@@ -58,12 +57,18 @@ export default {
   align-items: center;
   justify-content: center;
   -webkit-box-shadow: 1px 1px 5px;
-  -moz-box-shadow: 1px 1px 5px;
+  -moz-box-shadow: 1px 1px 5px ;
   box-shadow: 1px 1px 5px;
+  transition: all .2s;
+}
+
+.card:hover {
+  transform: scale(1.1)
 }
 
 .add-car {
-  background-color: #5c8dcd;
+  background-color: #ffffff;
+  border: 2px solid #5c8dcd;
   border-radius: 5px;
   padding: 5px;
   transition: all 0.2s;
@@ -71,7 +76,7 @@ export default {
 }
 
 .add-car:hover {
-  background-color: #5c9dcd;
+  background-color: #5c8dcd;
   -webkit-transform: scale(1.1);
   -moz-transform: scale(1.1);
   -ms-transform: scale(1.1);
@@ -80,7 +85,8 @@ export default {
 }
 
 .add-car:active {
-  background-color: #5c7dcd;
+  border: 2px solid #1cadfd;
+  background-color: #1cadfd;
 }
 
 .no-select {
