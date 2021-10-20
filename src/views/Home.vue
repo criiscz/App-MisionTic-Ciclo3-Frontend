@@ -57,7 +57,6 @@ export default {
         products.push(product)
       }
       localStorage.setItem("products", JSON.stringify(products));
-      console.log(products)
       alert("Agregado al carrito")
     }
   },
@@ -81,6 +80,7 @@ h1 {
   box-shadow: 1px 1px 5px;
   padding: 5% 5% 5% 5%;
   margin: 0 10% 0 10%;
+  transition: all 0.5s;
 }
 
 </style>
