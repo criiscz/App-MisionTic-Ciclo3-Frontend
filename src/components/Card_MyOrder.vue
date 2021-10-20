@@ -1,0 +1,144 @@
+<template>
+  <div class="body">
+    <div class="card">
+      <div class="titles">
+        <h4>Id</h4><h4>Precio Total</h4><h4>Fecha</h4><h4>Estado</h4>
+      </div>
+      <div class="values">
+        <h4>{{ id }}</h4>
+        <h4>${{ calculateTotalPrice() }}</h4>
+        <h4>{{ getDateFormatted() }}</h4>
+        <h4 v-bind:style="{color: defineColor()}">{{ order_status }}</h4>
+      </div>
+      <div class="buttons">
+        <div class="buttons-group">
+
+          <button v-if="order_status !== 4" class="changeStatus btn">
+            Cambiar Estado
+          </button>
+          <button class="see-detail btn" v-on:click=" $parent.fillData(
+              JSON.stringify({
+                sells:this.sells,
+                total:this.calculateTotalPrice(),
+                order_status:this.order_status
+              }
+          )); $parent.toggleModal()">
+            Ver detalle
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Card_MyOrder",
+  props: {
+    id: Number,
+    sells: Array,
+    order_date: Date,
+    order_status: ""
+  },
+  methods: {
+    calculateTotalPrice: function () {
+      let total = 0
+      for (const sell in this.sells) {
+        const price = this.sells[sell].product.sell_price
+        const quantity = this.sells[sell].product_quantity
+        total += price * quantity
+      }
+      return total;
+    },
+    getDateFormatted: function () {
+      const date = new Date(this.order_date)
+      return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+    },
+    defineColor: function () {
+      if (this.order_status === 'En Espera') return '#50ba26'
+      else if (this.order_status === 'Entregado') return '#2ea1ff'
+      else if (this.order_status === 'Cancelado') return '#310202'
+      else if (this.order_status === 'En Ruta') return '#d5783c'
+    }
+  }
+}
+</script>
+
+<style scoped>
+.card {
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px #999;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: .5em;
+  cursor: pointer;
+  width: 40vw;
+}
+
+.card:hover {
+  -webkit-transform: scale(1.03);
+  -moz-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  -o-transform: scale(1.03);
+  transform: scale(1.03);
+}
+
+.titles, .values {
+  font-family: "Segoe UI", serif;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  place-items: center;
+  height: 2.5em;
+}
+
+.titles {
+  font-weight: lighter;
+  font-size: 14px;
+  color: #555;
+}
+
+.values {
+}
+
+.buttons {
+  margin-top: 3em;
+  position: relative;
+}
+
+.buttons-group {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.btn {
+  background-color: transparent;
+  border: none;
+  margin: 0 1em;
+  padding: 5px 0;
+  transition: all .3s;
+  position: relative;
+  cursor: pointer;
+}
+
+.see-detail {
+  color: #0015AA;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  text-decoration: underline;
+}
+
+.changeStatus {
+  color: #2b9912;
+}
+
+.red {
+  color: red;
+}
+
+
+</style>

@@ -1,4 +1,5 @@
 <template>
+
   <div class="body">
     <div class="nav-bar">
 
@@ -82,7 +83,11 @@ export default {
     },
     showCart : function () {
       this.$router.push({name: "cart"})
-    }
+    },
+
+    loadProfile: function () {
+      this.$router.push({name: "account"})
+    },
   },
   created: function () {
     this.verifyAuth()
@@ -142,7 +147,7 @@ img {
   top: 50px;
   margin-bottom: 150px;
   margin-top: 2rem;
-  height: 100%;
+  min-height: 65vh;
 }
 
 .foot {
