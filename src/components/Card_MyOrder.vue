@@ -8,14 +8,14 @@
         <h4>{{ id }}</h4>
         <h4>${{ calculateTotalPrice() }}</h4>
         <h4>{{ getDateFormatted() }}</h4>
-        <h4 v-bind:style="{color: defineColor()}">{{ order_status }}</h4>
+        <h4 v-bind:style="{color: defineColor()}">{{ status }}</h4>
       </div>
       <div class="buttons">
         <div class="buttons-group">
 
           <button class="delete-btn btn" v-on:click="deleteOrder()">Delete</button>
-          <button v-if="order_status !== 4" class="changeStatus btn">
-            Cambiar Estado
+          <button v-if="status !== 'Entregado'" class="changeStatus btn" v-on:click="changeOrderStatus()">
+            Entregado!
           </button>
           <button class="see-detail btn" v-on:click=" $parent.fillData(
               JSON.stringify({
@@ -35,6 +35,7 @@
 
 <script>
 import axios from "axios";
+import {ref} from "vue";
 
 export default {
   name: "Card_MyOrder",
@@ -59,10 +60,10 @@ export default {
       return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
     },
     defineColor: function () {
-      if (this.order_status === 'En Espera') return '#50ba26'
-      else if (this.order_status === 'Entregado') return '#2ea1ff'
-      else if (this.order_status === 'Cancelado') return '#310202'
-      else if (this.order_status === 'En Ruta') return '#d5783c'
+      if (this.status === 'En Espera') return '#50ba26'
+      else if (this.status === 'Entregado') return '#2ea1ff'
+      else if (this.status === 'Cancelado') return '#310202'
+      else if (this.status === 'En Ruta') return '#d5783c'
     },
     deleteOrder: function () {
       if (localStorage.getItem("token_access") === null || localStorage.getItem("token_refresh") === null) {
@@ -77,7 +78,28 @@ export default {
       }).catch(error => {
         console.error(error)
       })
+    },
+    changeOrderStatus: function () {
+      if (localStorage.getItem("token_access") === null || localStorage.getItem("token_refresh") === null) {
+        this.$emit('logOut');
+      }
+      this.$parent.verifyToken()
+      const token = localStorage.getItem("token_access")
+
+      axios.patch("https://ecommerce-aacjp-missiontic.herokuapp.com/api/orders/update/status/" + this.id,
+          {order_status: 3},
+          {headers: {'Authorization': `Bearer ${token}`}}
+      ).then(result => {
+        this.status = result.data.order_status;
+
+      }).catch(error => {
+        console.error(error)})
     }
+
+  },
+  setup(props) {
+    let status = ref(props.order_status)
+    return {status}
   }
 }
 </script>

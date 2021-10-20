@@ -147,7 +147,8 @@ img {
   top: 50px;
   margin-bottom: 150px;
   margin-top: 2rem;
-  min-height: 65vh;
+  min-height: 80vh;
+  overflow-x: hidden;
 }
 
 .foot {
