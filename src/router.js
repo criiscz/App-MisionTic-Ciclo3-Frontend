@@ -7,6 +7,9 @@ import Account from "./views/Account";
 import MyOrders from "./views/AccountViews/MyOrders";
 import Profile from "./views/AccountViews/Profile";
 
+
+import Order from "./views/Order";
+
 const routes = [
     {
         path: '/',
@@ -27,6 +30,11 @@ const routes = [
         path: '/cart',
         name: 'cart',
         component: Cart
+    },
+    {
+        path: '/order',
+        name: 'order',
+        component: Order
     },
     {
         path: '/account',

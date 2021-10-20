@@ -9,9 +9,8 @@
 
         <div class="buttons">
           <Button_Nav v-if="is_auth" v-on:click="loadHome" msg="Tienda"/>
-          <Button_Nav v-if="is_auth" v-on:click="loadOrder" msg="Consultar Pedido"/>
+          <Button_Nav v-if="is_auth" v-on:click="orderById" msg="MiPedido"/>
           <Button_Nav v-if="is_auth" v-on:click="showCart" msg="MiCarrito"/>
-<!--          <Button_Nav v-if="is_auth" v-on:click="loadMyOrders" msg="MisPedidos"/>-->
           <Button_Nav v-if="is_auth" v-on:click="loadProfile" msg="MiCuenta"/>
           <Button_Nav v-if="is_auth" v-on:click="logOut" msg="Cerrar Sesion"></Button_Nav>
           <Button_Nav v-if="!is_auth" v-on:click="loadLogin" msg="Iniciar Sesión"/>
@@ -25,8 +24,9 @@
           v-on:completedLogin="completedLogin"
           v-on:completedSignup="completedSignup"
           v-on:logOut="logOut"
-      >
-      </router-view>
+          v-on:orderById ="orderById"
+      >    
+      </router-view>     
     </div>
   </div>
 
@@ -44,7 +44,7 @@ export default {
   },
   components: {
     Footer,
-    Button_Nav
+    Button_Nav,
   },
   methods: {
     verifyAuth: function () {
@@ -74,6 +74,9 @@ export default {
     loadHome: function () {
       this.$router.push({name: "home"})
     },
+    orderById: function (){
+      this.$router.push({name:"order"})
+    },
     logOut: function () {
       localStorage.clear()
       this.verifyAuth()
@@ -81,15 +84,10 @@ export default {
     showCart : function () {
       this.$router.push({name: "cart"})
     },
-    loadOrder: function (){
 
-    },
     loadProfile: function () {
       this.$router.push({name: "account"})
     },
-    loadMyOrders: function (){
-      this.$router.push({name: "myorders"})
-    }
   },
   created: function () {
     this.verifyAuth()
