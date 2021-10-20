@@ -62,7 +62,8 @@ export default {
   },
   created: async function () {
     await this.getData()
-  }
+  },
+  meta: {title:'Tienda Virtual - Ciclo 3 MisionTic2022'}
 }
 </script>
 <style scoped>
