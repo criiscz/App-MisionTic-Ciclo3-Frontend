@@ -8,6 +8,9 @@
     </form>
     
     <br />
+    <Modal @close="toggleModal" :modal-active="modalActive" class="modal" :sells="json_data.sells"
+           :total="json_data.total" :status="json_data.order_status">
+    </Modal>
     <div class="order_table">
       <Row_Order
         :order_id="order.order_id"
@@ -17,6 +20,7 @@
         :date_order="order.date_order"
         :order_status="order.order_status"
         :total="order.total"
+        :sells="sells"
       >
       </Row_Order>
     </div>
@@ -26,13 +30,17 @@
 <script>
 import axios from "axios";
 import Row_Order from "../components/Row_Order";
+import Modal from "../components/Modal";
+import {ref} from "vue";
 
 export default {
   name: "Order",
-  components: { Row_Order },
+  components: {Modal, Row_Order },
   data: function() {
     return {
+      json_data: {},
       input_id: "",
+      sells:[],
       order: {
         order_id: "",
         cli_id: "",
@@ -67,6 +75,7 @@ export default {
         )
         .then((result) => {
           const order = result.data;
+          this.sells = order.sells
           this.order.order_id = order.id;
           this.order.cli_id = order.client.id;
           this.order.cli_name = order.client.name;
@@ -84,7 +93,6 @@ export default {
               this.order.order_sells[i].product_quantity *
                 this.order.order_sells[i].product.sell_price;
           }
-          console.log(this.order.order_sells);
         })
         .catch((error) => {
           console.log(error);
@@ -104,7 +112,19 @@ export default {
           this.$emit("logOut");
         });
     },
+    fillData: function (json_data) {
+      this.json_data = JSON.parse(json_data)
+    }
+
   },
+  setup() {
+    const modalActive = ref(true)
+    const toggleModal = () => {
+      modalActive.value = !modalActive.value;
+    }
+
+    return {modalActive, toggleModal}
+  }
 };
 </script>
 

@@ -20,7 +20,13 @@
         <td class="cell">{{ order_status }}</td>
         <td class="cell">${{ total }}</td>
         <td class="cell">
-          <button>Productos</button>
+          <button v-on:click="$parent.fillData(
+              JSON.stringify({
+                sells: this.sells,
+                total:this.total,
+                order_status:this.order_status
+              })
+          );$parent.toggleModal()">Productos</button>
         </td>
       </tr>
     </table>    
@@ -38,12 +44,12 @@ export default {
     date_order: "",
     order_status: "",
     total: 0,
-    order_sells: "",
+    sells: Array,
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 table {
   width: 80%;
   border: 1px solid;
@@ -79,5 +85,30 @@ table {
 
 .btn-sells:active {
   background-color: #39f;
+}
+
+
+.row{
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  table {
+    border: none;
+    box-shadow: 1px 1px 5px;
+    border-radius: 5px;
+    padding: 1em;
+  }
+
+  .title{
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+  }
+
+  th,td {
+    border: none;
+  }
 }
 </style>
