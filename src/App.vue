@@ -9,7 +9,7 @@
         <div class="buttons">
           <Button_Nav v-if="is_auth" v-on:click="loadHome" msg="Tienda"/>
           <Button_Nav v-if="is_auth" v-on:click="orderById" msg="MiPedido"/>
-          <Button_Nav v-if="is_auth" v-on:click="loadCar" msg="MiCarrito"/>
+          <Button_Nav v-if="is_auth" v-on:click="showCart" msg="MiCarrito"/>
           <Button_Nav v-if="is_auth" v-on:click="loadProfile" msg="MiCuenta"/>
           <Button_Nav v-if="is_auth" v-on:click="logOut" msg="Cerrar Sesion"></Button_Nav>
           <Button_Nav v-if="!is_auth" v-on:click="loadLogin" msg="Iniciar Sesión"/>
@@ -45,7 +45,6 @@ export default {
     Footer,
     Button_Nav,
   },
-
   methods: {
     verifyAuth: function () {
       this.is_auth = localStorage.getItem('is_auth') || false
@@ -53,6 +52,7 @@ export default {
         this.$router.push({name: "login"})
       else this.$router.push({name: "home"})
     },
+
     loadLogin: function () {
       this.$router.push({name: "login"})
     },
@@ -60,7 +60,6 @@ export default {
       this.$router.push({name: "signup"})
     },
     completedLogin: function (data) {
-      console.log("completedLogin")
       localStorage.setItem("is_auth", true);
       localStorage.setItem("username", data.username)
       localStorage.setItem("token_access", data.token_access)
@@ -80,12 +79,13 @@ export default {
     logOut: function () {
       localStorage.clear()
       this.verifyAuth()
+    },
+    showCart : function () {
+      this.$router.push({name: "cart"})
     }
   },
   created: function () {
-    console.log("Creado")
     this.verifyAuth()
-    console.log(this.is_auth)
   }
 }
 </script>
@@ -152,7 +152,5 @@ img {
 .body {
   display: flex;
   flex-direction: column;
-  position: relative;
-  height: 100vh;
 }
 </style>

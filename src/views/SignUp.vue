@@ -11,7 +11,7 @@
         <br>
         <input type="text" v-model="user.account.username" placeholder="Username">
         <br>
-        <input type="text" v-model="user.account.password" placeholder="Password">
+        <input type="password" v-model="user.account.password" placeholder="Password">
         <br>
         <input type="email" v-model="user.account.email" placeholder="Email">
         <br>
@@ -29,7 +29,7 @@ export default {
   data: function () {
     return {
       user: {
-        id: 0,
+        id: Number,
         name: "",
         surname: "",
         account: {
@@ -65,7 +65,7 @@ export default {
 <style scoped>
 .signUp_user {
   margin: 0;
-  padding: 0%;
+  padding: 0;
   height: 100%;
   width: 100%;
   display: flex;
@@ -78,8 +78,8 @@ export default {
 
   border-radius: 10px;
 
-  width: 25%;
-  height: 60%;
+  width: 20em;
+  height: 30em;
   display: flex;
 
   flex-direction: column;
