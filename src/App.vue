@@ -8,7 +8,7 @@
 
         <div class="buttons">
           <Button_Nav v-if="is_auth" v-on:click="loadHome" msg="Tienda"/>
-          <Button_Nav v-if="is_auth" v-on:click="loadOrder" msg="MiPedido"/>
+          <Button_Nav v-if="is_auth" v-on:click="orderById" msg="MiPedido"/>
           <Button_Nav v-if="is_auth" v-on:click="loadCar" msg="MiCarrito"/>
           <Button_Nav v-if="is_auth" v-on:click="loadProfile" msg="MiCuenta"/>
           <Button_Nav v-if="is_auth" v-on:click="logOut" msg="Cerrar Sesion"></Button_Nav>
@@ -23,8 +23,9 @@
           v-on:completedLogin="completedLogin"
           v-on:completedSignup="completedSignup"
           v-on:logOut="logOut"
-      >
-      </router-view>
+          v-on:orderById ="orderById"
+      >    
+      </router-view>     
     </div>
   </div>
 
@@ -42,7 +43,7 @@ export default {
   },
   components: {
     Footer,
-    Button_Nav
+    Button_Nav,
   },
 
   methods: {
@@ -72,6 +73,9 @@ export default {
     },
     loadHome: function () {
       this.$router.push({name: "home"})
+    },
+    orderById: function (){
+      this.$router.push({name:"order"})
     },
     logOut: function () {
       localStorage.clear()
