@@ -30,11 +30,10 @@ import Card_MyOrder from "../../components/Card_MyOrder";
 import axios from "axios";
 import {ref} from "vue";
 import Modal from "../../components/Modal";
-import DetailsOrder_ModalInfo from "../../components/DetailsOrder_ModalInfo";
 
 export default {
   name: "MyOrders",
-  components: {DetailsOrder_ModalInfo, Modal, Card_MyOrder},
+  components: {Modal, Card_MyOrder},
   data: function () {
     return {
       json_data: {},
