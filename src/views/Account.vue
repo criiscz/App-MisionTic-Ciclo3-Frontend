@@ -24,8 +24,8 @@ export default {
   components: {Modal},
   data: function () {
     return {
-      isProfileActive: true,
-      isOrderActive: false,
+      isProfileActive: false,
+      isOrderActive: true,
     }
   },
   methods: {
@@ -47,7 +47,7 @@ export default {
 
   },
   created: function () {
-    this.loadProfile()
+    this.loadOrder()
   }
 }
 </script>
