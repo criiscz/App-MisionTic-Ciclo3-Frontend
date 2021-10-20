@@ -13,6 +13,7 @@
       <div class="buttons">
         <div class="buttons-group">
 
+          <button class="delete-btn btn" v-on:click="deleteOrder()">Delete</button>
           <button v-if="order_status !== 4" class="changeStatus btn">
             Cambiar Estado
           </button>
@@ -33,6 +34,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Card_MyOrder",
   props: {
@@ -60,6 +63,20 @@ export default {
       else if (this.order_status === 'Entregado') return '#2ea1ff'
       else if (this.order_status === 'Cancelado') return '#310202'
       else if (this.order_status === 'En Ruta') return '#d5783c'
+    },
+    deleteOrder: function () {
+      if (localStorage.getItem("token_access") === null || localStorage.getItem("token_refresh") === null) {
+        this.$emit('logOut');
+      }
+      this.$parent.verifyToken()
+      const token = localStorage.getItem("token_access")
+      axios.delete("https://ecommerce-aacjp-missiontic.herokuapp.com/api/orders/delete/" + this.id, {headers: {'Authorization': `Bearer ${token}`}}
+      ).then((result) => {
+        this.$parent.getData()
+        alert(result.data.detail);
+      }).catch(error => {
+        console.error(error)
+      })
     }
   }
 }
@@ -118,7 +135,7 @@ export default {
   border: none;
   margin: 0 1em;
   padding: 5px 0;
-  transition: all .3s;
+  transition: all .2s;
   position: relative;
   cursor: pointer;
 }
