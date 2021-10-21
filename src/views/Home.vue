@@ -2,7 +2,8 @@
   <div class="home">
     <h1>Productos</h1>
     <div class="products">
-      <Card v-for="{name, sell_price, id} in products" :key="id" :id="id" :price="sell_price"
+      <h3 v-if="products.length <= 0">Cargando productos...</h3>
+      <Card v-if="products.length > 0" v-for="{name, sell_price, id} in products" :key="id" :id="id" :price="sell_price"
             :product_name="name"></Card>
     </div>
   </div>
@@ -62,7 +63,8 @@ export default {
   },
   created: async function () {
     await this.getData()
-  }
+  },
+  meta: {title:'Tienda Virtual - Ciclo 3 MisionTic2022'}
 }
 </script>
 <style scoped>

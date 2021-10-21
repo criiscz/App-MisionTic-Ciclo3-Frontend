@@ -116,6 +116,7 @@ export default {
 
 
   .modal-inner {
+    border-radius: 10px;
     position: relative;
     max-width: 30em;
     max-height: 40em;

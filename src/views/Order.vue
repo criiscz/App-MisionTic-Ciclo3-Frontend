@@ -11,7 +11,7 @@
     <Modal @close="toggleModal" :modal-active="modalActive" class="modal" :sells="json_data.sells"
            :total="json_data.total" :status="json_data.order_status">
     </Modal>
-    <div class="order_table" v-if="sells.length > 0">
+    <div class="order_table" v-if="sells !== undefined">
       <Row_Order
         :order_id="order.order_id"
         :cli_id="order.cli_id"
@@ -40,7 +40,7 @@ export default {
     return {
       json_data: {},
       input_id: "",
-      sells:[],
+      sells: undefined,
       order: {
         order_id: "",
         cli_id: "",
