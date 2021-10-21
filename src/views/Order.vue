@@ -40,7 +40,7 @@ export default {
     return {
       json_data: {},
       input_id: "",
-      sells:[],
+      sells: undefined,
       order: {
         order_id: "",
         cli_id: "",
